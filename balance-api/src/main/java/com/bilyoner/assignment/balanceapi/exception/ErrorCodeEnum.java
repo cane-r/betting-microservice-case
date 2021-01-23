@@ -1,11 +1,15 @@
 package com.bilyoner.assignment.balanceapi.exception;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-@Getter
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 @AllArgsConstructor
+@Getter
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum ErrorCodeEnum {
 
     INTERNAL_SERVER_ERROR(1000, "Internal server error.", HttpStatus.INTERNAL_SERVER_ERROR),

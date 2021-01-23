@@ -2,9 +2,16 @@ package com.bilyoner.assignment.balanceapi.persistence.entity;
 
 import lombok.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import com.bilyoner.assignment.balanceapi.model.enums.TransactionType;
 
 @Builder
 @Setter
@@ -18,7 +25,10 @@ public class UserBalanceHistoryEntity {
     @GeneratedValue
     private Long id;
 
-    /**
-     * TODO : Implement missing parts
-     */
+    private Long userId;
+    private BigDecimal changeAmount;
+    private String transactionId;
+    @Enumerated(EnumType.STRING)
+    private TransactionType transactionType;
+    private LocalDateTime timestamp;
 }

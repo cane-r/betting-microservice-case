@@ -4,6 +4,9 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import com.bilyoner.assignment.balanceapi.model.enums.TransactionType;
+
 import java.math.BigDecimal;
 
 @Getter
@@ -20,5 +23,5 @@ public class UpdateBalanceRequest {
     @NotBlank
     private String transactionId;
     @NotBlank
-    private String transactionType;
+    private TransactionType transactionType;
 }
