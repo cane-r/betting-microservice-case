@@ -11,3 +11,7 @@ according to the rules listed in BilyonerHazırKuponOynat.pdf file.
     - Consider that DBInitializerService classes are populating database with sample eventEntity and user information 
       during start of services.
     - You can use swagger-ui or attached postman collection to test and use sample api calls.
+# Tests
+    - Run only unit tests : mvn test -DskipIntegrationTests
+    - Run only integration tests : mvn failsafe:integration-test
+    - Run both : mvn verify or mvn exec:exec

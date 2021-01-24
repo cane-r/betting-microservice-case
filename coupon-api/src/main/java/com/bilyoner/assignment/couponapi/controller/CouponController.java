@@ -13,30 +13,32 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/coupons")
 public class CouponController {
 
     private final CouponService couponService;
 
-    /**
-     * TODO : Implement missing parts
-     */
-
+    @GetMapping
     public List<CouponDTO> getAllCouponsByCouponStatus(@RequestParam CouponStatusEnum couponStatus) {
         return couponService.getAllCouponsByCouponStatus(couponStatus);
     }
-
+    @GetMapping("/all")
+    public List<CouponDTO> getAllCoupons() {
+        return couponService.getAllCoupons();
+    }
+    @PostMapping
     public CouponDTO createCoupon(@RequestBody @Valid CouponCreateRequest couponCreateRequest) {
         return couponService.createCoupon(couponCreateRequest);
     }
-
+    @GetMapping("/{userId}")
     public List<CouponDTO> getPlayedCoupons(@PathVariable Long userId) {
         return couponService.getPlayedCoupons(userId);
     }
-
+    @PutMapping
     public List<CouponDTO> playCoupons(@Valid @RequestBody CouponPlayRequest couponPlayRequest) {
         return couponService.playCoupons(couponPlayRequest);
     }
-
+    @DeleteMapping("/{couponId}")
     public CouponDTO cancelCoupon(@PathVariable Long couponId) {
         return couponService.cancelCoupon(couponId);
     }

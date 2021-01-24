@@ -50,6 +50,10 @@
             <artifactId>validation-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>${swagger.version}</version>
@@ -62,7 +66,15 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.28</version>
             <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock</artifactId>
+            <version>2.27.2</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -96,6 +108,68 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<executions>
+				</executions>
+				<configuration>
+					<testSourceDirectories>src/test/java</testSourceDirectories>
+					<includeTestSourceDirectory>true</includeTestSourceDirectory>
+					<consoleOutput>true</consoleOutput>
+					<failsOnError>true</failsOnError>
+					<!-- Valid values are "error", "warning" and "info" -->
+					<violationSeverity>error</violationSeverity>
+					<failOnViolation>true</failOnViolation>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<configuration>
+					<!-- mvn exec:exec -->
+					<executable>mvn</executable>
+					<arguments>
+						<argument>clean</argument>
+						<!-- <argument>checkstyle:check</argument> -->
+						<argument>verify</argument>
+						<argument>spring-boot:repackage</argument>
+						<!-- enable this if you don't want to run the app with "java -jar ..."  -->
+						<!-- <argument>spring-boot:run</argument> -->
+					</arguments>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>${skipUnitTests}</skipTests>
+					<includes>
+						<include>/**/*Test.java</include>
+					</includes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<configuration>
+					<includes>
+						<include>/**/*IT.java</include>
+					</includes>
+					<skipTests>${skipIntegrationTests}</skipTests>
+					<parallel>methods</parallel>
+					<threadCount>10</threadCount>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
         </plugins>
     </build>
 </project>

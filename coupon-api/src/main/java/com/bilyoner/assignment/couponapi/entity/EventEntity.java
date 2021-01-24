@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class EventEntity {
 
     @Id
